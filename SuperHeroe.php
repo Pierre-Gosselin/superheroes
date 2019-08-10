@@ -128,17 +128,20 @@ class SuperHeroe
         $query->bindValue(':universe',$this->universe());
 
         $query->execute();
-
     }
     public static function findAll($tri = "")
     {
         $tri ="ORDER BY `name` ASC";
-        $query = Database::connect()->query('SELECT * FROM `superheroe`'.$tri);
+        $db = Database::connect();
+        $sql = "SELECT * FROM `superheroe`".$tri;
+        $query = $db->query($sql);
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
     public static function find($id)
     {
-        $query = Database::connect()->prepare('SELECT * FROM `superheroe` WHERE id = :id');
+        $db = Database::connect();
+        $sql = "SELECT * FROM `superheroe` WHERE id = :id";
+        $query = $db->prepare($sql);
         $query->bindValue('id', $id);
         $query->execute();
         // Le setFetchMode ici permet de retourner une instance de SuperHeroe avec fetch plutôt qu'une instance de StdClass

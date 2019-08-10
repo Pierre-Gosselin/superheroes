@@ -6,20 +6,14 @@ $id = isset($_GET['id'])? trim($_GET['id']): null;
 
 if (ctype_digit($id))
 {
-    $id = $_GET['id'];
-    $db = Database::connect();
-
-    $sql = "SELECT * FROM `supernaughty` WHERE `id`=:id";
-
-    $query = $db->prepare($sql);
-    $query->bindValue(':id',$id, PDO::PARAM_INT);
-    $query->execute();
-
-    $supernaughty = $query->fetch(PDO::FETCH_OBJ);
-
+    $supernaughty = SuperNaughty::find($id);
     if (!$supernaughty){
-        header('location:read-naughty.php');
-    }
+        header('location:read.php');
+    } 
+}
+else
+{
+    header('location:read.php');
 }
 
 if ($_SERVER['REQUEST_METHOD'] === "POST")
@@ -32,9 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
 }
 ?>
 
-<h1>Suppresion de <?= $supernaughty->name?></h1>
+<h1>Suppresion de <?= $supernaughty->name(); ?></h1>
 
-<p>Confirmer la suppression du vilain : "<?= $supernaughty->name ?>"</p>
+<p>Confirmer la suppression du vilain : "<?= $supernaughty->name()." (id:".$id.")"; ?>"</p>
+<p>Hobby : <?= $supernaughty->hobby(); ?></p>
+<p>Identity : <?= $supernaughty->identity(); ?></p>
+<p>Universe : <?= $supernaughty->universe(); ?></p>
 <div class="row justify-content-center">
     <div class="col-2">
         <form method="post">

@@ -106,9 +106,22 @@ class SuperNaughty
         $query->execute();
     }
 
-    public static function findAll()
+    public static function findAll($tri = "")
     {
-        $query = Database::connect()->query('SELECT * FROM `supernaughty`');
+        $tri = "ORDER BY name ASC";
+        $db = Database::connect();
+        $sql = "SELECT * FROM `supernaughty`";
+        $query = $db->query($sql);
         return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public static function find($id)
+    {
+        $query = Database::connect()->prepare('SELECT * FROM `supernaughty` WHERE id = :id');
+        $query->bindValue('id', $id);
+        $query->execute();
+        // Le setFetchMode ici permet de retourner une instance de SuperNaughty avec fetch plutôt qu'une instance de StdClass
+        $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, SuperNaughty::class);
+        return $query->fetch(PDO::FETCH_CLASS); // le fetch fait un new SuperNaughty(); grâce à PDO::FETCH_CLASS
     }
 }

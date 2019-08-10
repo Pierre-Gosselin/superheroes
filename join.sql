@@ -8,7 +8,6 @@ INNER JOIN supernaughty AS t2 ON t2.id = t3.supernaughty_id
 WHERE 
     t1.id = 7
 
-
 SELECT 
     t1.name,
     t2.name
@@ -19,6 +18,7 @@ INNER JOIN supernaughty AS t2 ON t2.id = t3.supernaughty_id
 WHERE 
     t2.id = 9
 
+--Création de table
 
 CREATE TABLE supernaughty (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,

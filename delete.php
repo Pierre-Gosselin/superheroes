@@ -7,7 +7,6 @@ $id = isset($_GET['id'])? trim($_GET['id']): null;
 if (ctype_digit($id))
 {
     $superheroe = SuperHeroe::find($id);
-    var_dump($superheroe);
     if (!$superheroe){
         header('location:read.php');
     }
