@@ -1,4 +1,10 @@
 <?php
+// A faire
+//POO
+// Heroe Read, Update, Delete, Create
+// Naughty Read, Update, Delete, Create
+// Convertir 00000x en x
+// class image
 
 require_once "config/autoload.php";
 
@@ -10,11 +16,11 @@ require_once "partials/header.php";
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Avatar</th>
-                <th scope="col">Name<i class="fas fa-sort ml-1"></i></th>
-                <th scope="col">Power<i class="fas fa-sort ml-1"></i></th>
-                <th scope="col">Identity<i class="fas fa-sort ml-1"></i></th>
-                <th scope="col">Universe<i class="fas fa-sort ml-1"></i></th>
-                <th scope="col">Ennemis<i class="fas fa-sort ml-1"></i></th>
+                <th scope="col"><a href="">Name<i class="fas fa-sort ml-1"></i></a></th>
+                <th scope="col"><a href="">Power<i class="fas fa-sort ml-1"></i></a></th>
+                <th scope="col"><a href="">Identity<i class="fas fa-sort ml-1"></i></a></th>
+                <th scope="col"><a href="">Universe<i class="fas fa-sort ml-1"></i></a></th>
+                <th scope="col"><a href="">Ennemis<i class="fas fa-sort ml-1"></i></a></th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>

@@ -4,12 +4,7 @@ require_once "config/autoload.php";
 
 $db = Database::connect();
 
-$sql = "SELECT * FROM `supernaughty`";
-// Execution de la requete
-$r = $db->query($sql);
-
-// Recupération des résultats
-$supernaughtys = $r->fetchAll(PDO::FETCH_OBJ);
+$supernaughtys = SuperNaughty::findAll();
 
 
 require_once "partials/header.php";

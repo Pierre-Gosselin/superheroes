@@ -6,6 +6,11 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script src="https://kit.fontawesome.com/dd44d05ee9.js"></script>
+        <style>
+        a{
+            color:#495057;
+        }
+        </style>
         <title>Document</title>
     </head>
     <body>

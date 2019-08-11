@@ -2,28 +2,19 @@
 include_once "partials/header.php";
 require_once "config/autoload.php";
 
-
 $id = isset($_GET['id'])? trim($_GET['id']): null;
 
 if (ctype_digit($id))
 {
-    $db = Database::connect();
-
-    $sql = "SELECT * FROM `supernaughty` WHERE `id`=:id";
-    $query = $db->prepare($sql);
-
-    $query->bindValue(':id',$id, PDO::PARAM_INT);
-
-    $query->execute();
-
-    $query->setFetchMode(PDO::FETCH_CLASS, SuperNaughty::class);
-
-    $supernaughty = $query->fetch();
-
+    $supernaughty = SuperNaughty::find($id);
     if (!$supernaughty)
     {
         header('location:read-naughty.php');
     }
+}
+else
+{
+    header('location:read-naughty.php');
 }
 
 if ($_SERVER['REQUEST_METHOD'] === "POST")
@@ -33,8 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
 
     header('location:read-naughty.php');
 }
-
-
 ?>
 
 <h1>Modifier un super vilain</h1>

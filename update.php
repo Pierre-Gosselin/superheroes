@@ -11,32 +11,19 @@ $universes = ['Marvel','DC'];
 
 if (ctype_digit($id))
 {
-    $id = $_GET['id'];
-    $db = Database::connect();
-
-    $sql = "SELECT * FROM `superheroe` WHERE `id`=:id";
-    // Execution de la requete
-    $query = $db->prepare($sql);
-
-    $query->bindValue(':id',$id, PDO::PARAM_INT);
-
-    $query->execute();
-
-    $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, SuperHeroe::class);
-    // Recupération des résultats
-    $superheroes = $query->fetch();
-
-    if (!$superheroes)
-    {
+    $superheroe = SuperHeroe::find($id);
+    if (!$superheroe){
         header('location:read.php');
     }
-
-    $name = $superheroes->name();
-    $power = $superheroes->power();
-    $identity = $superheroes->identity();
-    $universe = $superheroes->universe();
+    $name = $superheroe->name();
+    $power = $superheroe->power();
+    $identity = $superheroe->identity();
+    $universe = $superheroe->universe();
 }
-
+else
+{
+    header('location:read.php');
+}
 
 if( $_SERVER['REQUEST_METHOD'] === "POST"){
     // 1. Initialisation des erreurs
