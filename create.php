@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
     $power = isset($_POST['power']) ? trim(htmlentities($_POST['power'])): null;
     $identity = isset($_POST['identity']) ? trim(htmlentities($_POST['identity'])): null;
     $universe = isset($_POST['universe']) ? trim(htmlentities($_POST['universe'])): null;
+    $image = isset($_FILES['image']) ? $_FILES['image']: null;
 
     // 3. Vérification des données
     if (strlen($name)<2)
@@ -44,9 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
 
     if (empty($errors))
     {
-        $heroe = new SuperHeroe();
-        $heroe->hydrate($_POST);
-        
+        $heroe = new SuperHeroe($_POST,$_FILES);
+        exit;
+
+
         if ($heroe->create())
         {
             header('Location: read.php'); 
@@ -56,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST")
 ?>
 
 <h1>Ajouter un superhéros</h1>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     <?php
         require_once "form.php";
     ?>

@@ -1,43 +1,52 @@
 <?php
-require_once "config/autoload.php";
-require_once "partials/header.php";
 
-if( $_SERVER['REQUEST_METHOD'] === "POST"){
-    $photo = isset($_FILES['photo']) ? $_FILES['photo']: null;
+class Upload
+{
+    private $name;
+    private $tmpName;
+    private $error;
+    private $type;
+    private $size;
 
-    /*
-    $upload = new Upload($image);
-    $upload->handle(__DIR__.'/upload')
-    */
 
-    // Pas d'erreur dans sur l'upload
-    if ($photo != null && $photo['error'] === 0)
+    public function hydrate($image)
     {
-        // On récupère l'emplacement temporaire de l'image
-        $tmp_name  = $image['tmp_name'];
-
-        // On crée une dossier upload s'il n'est pas présent
-        if (!is_dir(__DIR__.'/upload'))
+        if ($image != null && $image['error'] === 0)
         {
-            mkdir(__DIR__.'/upload');    
+            $this->name = $image['name'];
+            // On récupère l'emplacement temporaire de l'image
+            $this->tmpName = $image['tmp_name'];
+            $this->error = $image['error'];
+            $this->type = $image['type'];
+            $this->size = $image['size'];
+        }
+    }
+
+    public function __construct($image)
+    {
+        $this->hydrate($image);
+    }
+
+    // Manipulation de l'image
+    public function handle($dir)
+    {
+        
+        // On crée une dossier upload s'il n'est pas présent
+        if (!is_dir($dir))
+        {
+            mkdir($dir);    
         }
         
         // On génère un nom pour l'image
-        $file_name = uniqid().$image;
-
+        $file_name = uniqid().$this->name;
         // On déplace le fichier temporaire dans l'emplacement voulu
-        move_uploaded_file($tmp_name, __DIR__.'/upload/'.$file_name);
+        move_uploaded_file($this->tmpName, $dir."/".$file_name);
+    
+        $this->name = $dir."/".$file_name;
+    }
 
+    public function read()
+    {
+        return $this->name;
     }
 }
-
-
-?>
-
-<form method="post" enctype="multipart/form-data">
-<label for="image">Image</label>
-<input type="file" name="image" class="form-control">
-<button type="submit" class="btn btn-primary">Submit</button>
-</form>
-<?php
-require_once "partials/footer.php";

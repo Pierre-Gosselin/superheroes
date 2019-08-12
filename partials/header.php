@@ -36,6 +36,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./association-hero-naughty.php">Association</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./ajout.php">Ajout</a>
+                    </li>
                 </ul>
             </div>
         </nav>

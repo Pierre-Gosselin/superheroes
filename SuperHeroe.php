@@ -6,6 +6,7 @@ class SuperHeroe
     private $power;
     private $identity;
     private $universe;
+    private $image;
     public static $tabHeroe;
 
     //getters
@@ -25,28 +26,36 @@ class SuperHeroe
     {
         return $this->universe;
     }
-
+    public function image()
+    {
+        return $this->image;
+    }
     //setters
     public function setName($name)
     {
-        $this->name = trim($name);
+        $this->name = $name;
     }
     public function setIdentity($identity)
     {
-        $this->identity = trim($identity);
+        $this->identity = $identity;
     }
     public function setPower($power)
     {
-        $this->power = trim($power);
+        $this->power = $power;
     }
     public function setUniverse($universe)
     {
-        $this->universe = trim($universe);
+        $this->universe = $universe;
+    }
+    public function setImage($image)
+    {
+        $this->image = $image;
+        var_dump($image);
     }
 
-    public function hydrate($naughty)
+    public function hydrate($heroe)
     {
-        foreach ($naughty as $key => $value)
+        foreach ($heroe as $key => $value)
         {
           $method = 'set'.ucfirst($key);
           
